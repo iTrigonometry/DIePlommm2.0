@@ -73,14 +73,11 @@ namespace DIePlommm
                 double mBit = Math.Round((bytes / 125000), 3);
 
 
-                //asdfdfdfd
                 //---------------------ВЫВОД ИНФОРМАЦИИ-------------------------------
                 string outputTextBoxMbits = mBit.ToString() + "Mbit/sec";
                 string outputTextBoxKbits = kBit.ToString() + "Kbit/sec";
 
 
-
-                int alo = 1;
                 if (mBit <= 0.5)                {
                     textBox1.Text = outputTextBoxKbits;
                 }
