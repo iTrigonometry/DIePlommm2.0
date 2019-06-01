@@ -73,7 +73,7 @@
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series1.Legend = "Legend1";
-            series1.Name = "Входящий трафик";
+            series1.Name = "Входящий трафик Mbit";
             this.chartMbits.Series.Add(series1);
             this.chartMbits.Size = new System.Drawing.Size(755, 260);
             this.chartMbits.TabIndex = 5;
