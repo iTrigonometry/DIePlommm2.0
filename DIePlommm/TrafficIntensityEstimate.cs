@@ -16,9 +16,9 @@ namespace DIePlommm
         public TrafficIntensityEstimate()
         {
             categoriesOfCounters = PerformanceCounterCategory.GetCategories();
-            indexOfNetworkInterface = findNetworkInterface();
+            indexOfNetworkInterface = FindNetworkInterface();
 
-            string[] instanceNames = getNetworkInterfaces();
+            string[] instanceNames = GetNetworkInterfaces();
             inputTrafficCounter = new PerformanceCounter(categoriesOfCounters[indexOfNetworkInterface].CategoryName, "Bytes Received/sec", instanceNames[0]);
         }
 
@@ -26,7 +26,7 @@ namespace DIePlommm
         /**
          * Ищет категорию сетевых интерфейсов среди всех интерфейсов
          */
-        private int findNetworkInterface()
+        private int FindNetworkInterface()
         {
             for (int i = 0; i < categoriesOfCounters.Length; i++)
                 if (categoriesOfCounters[i].CategoryName.Equals("Network Interface"))
@@ -38,7 +38,7 @@ namespace DIePlommm
         /**
          * Возвращает все сетевые интерфейсы которые есть на компьютере
          */
-        public string[] getNetworkInterfaces()
+        public string[] GetNetworkInterfaces()
         {
             string[] instanceNames = categoriesOfCounters[indexOfNetworkInterface].GetInstanceNames();
             return instanceNames;
@@ -48,7 +48,7 @@ namespace DIePlommm
         /**
          * Опредеялет сетевой интерфейс для Counter
          */
-        public void setNetworkInterface(String networkInterface)
+        public void SetNetworkInterface(String networkInterface)
         {
             inputTrafficCounter = new PerformanceCounter(categoriesOfCounters[indexOfNetworkInterface].CategoryName, "Bytes Received/sec", networkInterface);
         }
@@ -56,7 +56,7 @@ namespace DIePlommm
         /**
          * Возвращает значение Counter
          */
-        public float getInputTraffic()
+        public float GetInputTraffic()
         {
             return inputTrafficCounter.NextValue();
         }
@@ -65,22 +65,22 @@ namespace DIePlommm
         /**
          *На основе того идет ли трафик будет определяться есть подключение или нет
          */
-        public bool isNetworkConnection()
+        public bool IsNetworkConnection()
         {
-            if(getInputTraffic() > 0)
+            if(GetInputTraffic() > 0)
             {
                 return true;
             }
             return false;
         }
 
-        public string getStringMBits()
+        public string GetStringMBits()
         {
             double data = Math.Round(inputTrafficCounter.NextValue(), 3) / 125000;
             return data.ToString() + "Mbits";
         }
 
-        public string getStringKBits()
+        public string GetStringKBits()
         {
             double data = Math.Round(inputTrafficCounter.NextValue(), 3) / 125;
             return data.ToString() + "Mbits";

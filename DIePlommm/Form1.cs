@@ -15,16 +15,15 @@ namespace DIePlommm
         TrafficIntensityEstimate tie; //отвечает за информацию которая будет появляться на экране
         Timer timer; //таймер который отвечает за обновление информации
         bool networkConnection; //позволит определять есть ли соеденение                
-
-
-        /**
-         * Отсюдава програма начинаеся
+        
+        /**<summary>
+         * начало программы
+         * </summary>
          */
         public static void Main()
         { 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
             Form f = new Form1();
             Application.Run(f);
         }
@@ -32,7 +31,10 @@ namespace DIePlommm
 
        
         /**
-         * Конструктор
+         * <summary>
+         * Конструктор класса форм. 
+         * Заготавливает основу формы
+         * </summary>
          */
         public Form1()
         {
@@ -43,32 +45,34 @@ namespace DIePlommm
             tie = new TrafficIntensityEstimate();
 
             //-----------------------------Выводим интерфейсы в ListBox----------------------------------
-            listBox1.DataSource = tie.getNetworkInterfaces();
+            listBox1.DataSource = tie.GetNetworkInterfaces();
 
             //-------------------------------------------------------------------------------------------
-            listBox1.SelectedIndexChanged += changeNetworkInterface;
-            networkConnection = isNetworkConnection();
-            turnOnZoom();
+            listBox1.SelectedIndexChanged += ChangeNetworkInterface;
+            networkConnection = IsNetworkConnection();
+            TurnOnZoom();
 
             //-------------------------------Определяем работу таймера-----------------------------------
             timer = new Timer();
-            timer.Tick += outputData;
-            changeInterval();
+            timer.Tick += OutputData;
+            ChangeInterval();
             timer.Start();
         }
 
 
         /**
+         * <summary>
          * Метод для постоянного обновления значения интенсивности трафика
          * Метод для Timer.Tick
          * Рисуется график и выводится текущее значение интенсивности трафика
+         * </summary>
          */
-        private void outputData(object sender, EventArgs e)
+        private void OutputData(object sender, EventArgs e)
         {
             if (networkConnection)
             {
                 //------------------------ИНИЦИАЛИЩАЦИЯ ПЕРЕМЕННЫХ--------------------
-                double bytes = tie.getInputTraffic();
+                double bytes = tie.GetInputTraffic();
                 double kBit = Math.Round((bytes / 125), 3);
                 double mBit = Math.Round((bytes / 125000), 3);
 
@@ -89,32 +93,36 @@ namespace DIePlommm
             else
             {
                 textBox1.Text = "NotConnection";
-                networkConnection = isNetworkConnection();
+                networkConnection = IsNetworkConnection();
             }
         }
 
 
 
         /**
+         * <summary>
          * Реагирует на изменения выбраного сетевого интерфейса в listBox1
+         * </summary>
          */
-        private void changeNetworkInterface(object sender, EventArgs e)
+        private void ChangeNetworkInterface(object sender, EventArgs e)
         {
-            tie.setNetworkInterface(listBox1.SelectedItem as String);
+            tie.SetNetworkInterface(listBox1.SelectedItem as String);
             chartMbits.Series[0].Points.Clear();
 
-            networkConnection = isNetworkConnection();
+            networkConnection = IsNetworkConnection();
         }
 
 
 
         /**
+         * <summary>
          * Метод проверяет есть ли подключение по данному сетевому интерфейсу.
          * Если нагрузка нулевая, то подключение отсутсвует
+         * </summary>
          */
-       private bool isNetworkConnection()
+        private bool IsNetworkConnection()
         {
-           if (tie.isNetworkConnection())
+           if (tie.IsNetworkConnection())
             {
                 label2.ForeColor = Color.Green;
                 label2.Text = "Connection";
@@ -128,8 +136,10 @@ namespace DIePlommm
 
 
         /**
+         * <summary>
          * Метод реагирует на нажатие кнопки buttonResetZoom
          * Убирает последний зум по X и Y
+         * </summary>
          */
         private void ButtonResetZoom_Click(object sender, EventArgs e)
         {
@@ -139,8 +149,10 @@ namespace DIePlommm
 
 
         /**
+         * <summary>
          * Метод реагирует на нажатие клавиши buttonClearGraph
          * Очищает график
+         * </summary>
          */
         private void ButtonClearGraph_Click(object sender, EventArgs e)
         {
@@ -149,24 +161,27 @@ namespace DIePlommm
 
 
         /**
+         * <summary>
          * Метод реагирует на изменение значения в numericUpDown1
+         * </summary>
          */
         private void NumericUpDown1_ValueChanged(object sender, EventArgs e)
         {
-            changeInterval();
+            ChangeInterval();
         }
 
 
         /**
+         * <summary>
          * Метод для изменения интервала таймера в зависимости от значения в numericUpDown1
          * Так же выводит в labelIntervalError текст о том большой ли интервал был выбран. 
          * В моем понимании интервал больше 5 может стать большой проблемой в качестве полученных данных.
          * Неизвестно что произошло за эти 4 секунды. 3 это край край
+         * </summary>
          */
-        private void changeInterval()
+        private void ChangeInterval()
         {
             timer.Interval = (int)numericUpDown1.Value * 1000;
-
 
             if ((int)numericUpDown1.Value >= 4)
             {
@@ -181,15 +196,19 @@ namespace DIePlommm
         }
 
         /**
+         * <summary>
          * Метод который включает возможность масштабирования графика
+         * </summary>
          */
-        private void turnOnZoom()
+        private void TurnOnZoom()
         {
+            //включаем зум по Х
             chartMbits.ChartAreas[0].CursorX.IsUserEnabled = true;
             chartMbits.ChartAreas[0].CursorX.IsUserSelectionEnabled = true;
             chartMbits.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
             chartMbits.ChartAreas[0].AxisX.ScrollBar.IsPositionedInside = true;
 
+            //включаем зум по Y
             chartMbits.ChartAreas[0].CursorY.IsUserEnabled = true;
             chartMbits.ChartAreas[0].CursorY.IsUserSelectionEnabled = true;
             chartMbits.ChartAreas[0].AxisY.ScaleView.Zoomable = true;
