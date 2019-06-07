@@ -1,6 +1,6 @@
 ﻿namespace DIePlommm
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -37,7 +37,7 @@
             this.buttonResetZoom = new System.Windows.Forms.Button();
             this.buttonClearGraph = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelStatus = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.labelIntervalError = new System.Windows.Forms.Label();
@@ -109,14 +109,14 @@
             this.label1.TabIndex = 8;
             this.label1.Text = "Статус";
             // 
-            // label2
+            // labelStatus
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(59, 352);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(37, 13);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Status";
+            this.labelStatus.AutoSize = true;
+            this.labelStatus.Location = new System.Drawing.Point(59, 352);
+            this.labelStatus.Name = "labelStatus";
+            this.labelStatus.Size = new System.Drawing.Size(37, 13);
+            this.labelStatus.TabIndex = 9;
+            this.labelStatus.Text = "Status";
             // 
             // numericUpDown1
             // 
@@ -158,7 +158,7 @@
             this.labelIntervalError.Size = new System.Drawing.Size(216, 57);
             this.labelIntervalError.TabIndex = 12;
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -168,14 +168,14 @@
             this.Controls.Add(this.labelIntervalError);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.labelStatus);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonClearGraph);
             this.Controls.Add(this.buttonResetZoom);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.chartMbits);
             this.Controls.Add(this.listBox1);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Оценка интенсивности трафика";
             ((System.ComponentModel.ISupportInitialize)(this.chartMbits)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
@@ -192,7 +192,7 @@
         private System.Windows.Forms.Button buttonResetZoom;
         private System.Windows.Forms.Button buttonClearGraph;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelStatus;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label labelIntervalError;
